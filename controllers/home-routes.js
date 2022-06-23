@@ -33,7 +33,6 @@ router.get('/', (req, res) => {
       // into a serialized version of itself, 
       //saving the results in a new posts array
       const posts = dbPostData.map(post => post.get({ plain: true }));
-
       res.render('homepage', { posts });
     })
     .catch(err => {
