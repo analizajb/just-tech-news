@@ -41,4 +41,9 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/login', (req, res) => {
+  // Note that our login page doesn't need variables so no need for a second argument.
+  res.render('login');
+});
+
 module.exports = router;
