@@ -1,3 +1,4 @@
+
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, User, Comment, Vote } = require('../models');
@@ -29,10 +30,8 @@ router.get('/', (req, res) => {
     ]
   })
     .then(dbPostData => {
-      //This will loop over and map each Sequelize object
-      // into a serialized version of itself, 
-      //saving the results in a new posts array
       const posts = dbPostData.map(post => post.get({ plain: true }));
+
       res.render('homepage', { posts });
     })
     .catch(err => {
@@ -42,7 +41,11 @@ router.get('/', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  // Note that our login page doesn't need variables so no need for a second argument.
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
   res.render('login');
 });
 
